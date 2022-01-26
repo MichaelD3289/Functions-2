@@ -5,16 +5,18 @@
   Invoke the callback, passing in the product of the two numbers multiplied as the argument. 
 */
 
-// CODE HERE
+function multiply(x, y, cb) {
+ cb(x * y);
+}
 
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// multiply(4, 3, answer => {
-//   console.log('The answer is ' + answer) //should console.log 12
-// })
+multiply(4, 3, answer => {
+  console.log('The answer is ' + answer) //should console.log 12
+})
 
 
 
@@ -35,16 +37,18 @@ var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan']
   Then invoke the callback function, passing in the first element in the array as it's argument.
 */
 
-// CODE HERE 
+function first(arr, cb) {
+  cb(arr[0]);
+}
 
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// first(names, firstName => {
-//   console.log('The first name in names is ' + firstName)
-// })
+first(names, firstName => {
+  console.log('The first name in names is ' + firstName)
+})
 
 
 
@@ -55,16 +59,18 @@ var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan']
   Then invoke the callback, passing in the last element in the array as the argument.
 */
 
-// CODE HERE
+function last(arr, cb) {
+cb(arr[arr.length - 1]);
+}
 
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// last(names, lastName => {
-//   console.log('The last name in names is ' + lastName)
-// })
+last(names, lastName => {
+  console.log('The last name in names is ' + lastName)
+})
 
 
 
@@ -77,20 +83,22 @@ var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan']
   If the name does not exist, invoke the callback with false as the argument.
 */
 
-// CODE HERE 
+function contains(arr, name, cb) {
+  cb(arr.includes(name));
+}
 
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// contains(names, 'Colt', result => {
-//   if(result === true){
-//     console.log('Colt is in the array')
-//   } else {
-//     console.log('Colt is not in the array')
-//   }
-// })
+contains(names, 'Colt', result => {
+  if(result === true){
+    console.log('Colt is in the array')
+  } else {
+    console.log('Colt is not in the array')
+  }
+})
 
 
 
@@ -102,7 +110,10 @@ var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan']
   Hint: you can use a nested for loop to do this.
 */
 
-// CODE HERE
+function uniq(arr, cb) {
+   let newArr = [...new Set(arr)];
+   cb(newArr);
+}
 
 /*
   Invoke the uniq function, passing in the names array from above and a callback function.
@@ -111,7 +122,7 @@ var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan']
   'The new names array with all the duplicate items removed is [UNIQARRPARAM].'
 */
 
-// CODE HERE
+uniq(names, (uniqArr) => console.log(`The new narmes array with all the duplicate items removed is ${uniqArr}`));
 
 
 
@@ -122,7 +133,11 @@ var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan']
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 */
 
-// CODE HERE 
+function each(arr, cb) {
+  for(let i = 0; i < arr.length; i++) {
+    cb(arr[i], i);
+  }
+}
 
 
 /*
@@ -132,7 +147,7 @@ var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan']
   'The item at index [INDEXPARAM] is [ITEMPARAM].'
 */
 
-// CODE HERE
+each(names, (item, index) => console.log(`The item at index ${index} is ${item}`))
 
 
 ////////// PROBLEM 7 //////////
@@ -165,16 +180,19 @@ var users = [
 ]
 // Do not edit the code above.
 
-// CODE HERE 
+function getUserById(arr, id, cb) {
+  let newArr = arr.filter((user) => user.id === id)
+  cb(newArr[0]);
+}
 
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// getUserById(users, '16t', user => {
-//   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
-// })
+getUserById(users, '16t', user => {
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
+})
 
 ////////// CHALLENGE //////////
 
@@ -192,7 +210,9 @@ var users = [
   the two parameters together and return the sum.
 */
 
-// CODE HERE
+function addingFactory(num1) {
+  return num2 => num1 + num2;
+}
 
 /*
   Now that you have addingFactory, you can create other
@@ -206,7 +226,7 @@ var users = [
   10 as an arguemnt.
 */
 
-// CODE HERE
+let addTen = addingFactory(10);
 
 /*
   Now the inner function is stored in the addTen variable! 
@@ -218,7 +238,8 @@ var users = [
   to see the different outputs.
 */
 
-// CODE HERE
+console.log(addTen(24));
+console.log(addTen(31))
 
 /*
   Let's make another function from the addingFactory. 
@@ -231,4 +252,6 @@ var users = [
   to add any number to your favorite number!
 */
 
-// CODE HERE
+let add26 = addingFactory(26);
+
+console.log(add26(50));
